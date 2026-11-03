@@ -2,34 +2,29 @@
 
 declare(strict_types=1);
 
-/*
- * تَوان | Tavaan — Upgrade
- * config/upgrade.php — پیکربندی جریان ارتقا (DOC-081E).
+/*|--------------------------------------------------------------------------
+ | Upgrade Engine Configuration
+ |--------------------------------------------------------------------------
+ |
+ | پیکربندی موتور upgrade — همهٔ کلیدهای مستندشده در `docs/03-engines/upgrade.md` بخش «پیکربندی».
+ |
+ |@see https://github.com/Derogaramin/Tavaan-Doc/blob/main/docs/03-engines/upgrade.md
  */
 
 return [
-    // ریشهٔ patchهای ارتقا: upgrades/<version>/patch_*.php + config.php
-    'path' => base_path('upgrades'),
+    /*| پیش‌فرض موتور (driver/store یا حالت فعال) */
+    'default' => env('UPGRADE_DEFAULT', 'default'),
 
-    // 🔒 pre-check (DOC-081E §2 گام ۱)
-    'precheck' => [
-        'php_min' => '8.2.0',
-        'extensions' => ['json', 'mbstring', 'pdo', 'openssl'],
-        'min_free_mb' => 100,
+    /*| کلید کش (در صورت استفاده) */
+    'prefix' => env('UPGRADE_PREFIX', 'upgrade:'),
+
+    /*| تنظیمات لاگ */
+    'log' => [
+        'channel' => env('UPGRADE_LOG_CHANNEL', 'upgrade'),
     ],
 
-    // backup اجباری پیش از ارتقا (§8) — فقط dev/CI با --no-backup
-    'require_backup' => env_bool('TVN_UPGRADE_BACKUP', true),
-
-    // اجرای schema migrationها در هر گام نسخه
-    'schema_migrations' => true,
-
-    // maintenance mode (§2 گام ۳)
-    'maintenance' => [
-        'enabled' => true,
-        'message' => 'سیستم در حال ارتقا است… / Upgrading…',
+    /*| سایر کلیدها (طبق مستندات) */
+    'options' => [
+        // TODO: کلیدهای اضافی طبق سند §۶ (پیکربندی)
     ],
-
-    // مسیر فایل down (هم‌مسیر با MaintenanceModeMiddleware)
-    'down_file' => storage_path('framework/down'),
 ];
