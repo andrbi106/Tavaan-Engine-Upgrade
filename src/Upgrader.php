@@ -6,23 +6,23 @@ namespace Tavaan\Engine\Upgrade;
 
 final class Upgrader
 {
-    public function upgrade(/* ... */): mixed
+    public function upgrade()
     {
         return null;
     }
-    public function check(/* ... */): mixed
+    public function check(): bool
     {
         return $this->user !== null;
     }
-    public function rollback(/* ... */): mixed
+    public function rollback()
     {
         return null;
     }
-    public function status(/* ... */): mixed
+    public function status()
     {
         return null;
     }
-    public function patches(/* ... */): mixed
+    public function patches()
     {
         return null;
     }
