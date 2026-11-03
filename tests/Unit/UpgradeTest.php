@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Upgrade\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tavaan\Testing\TestCase;
 use Tavaan\Engine\Upgrade\UpgradeManager;
 use Tavaan\Engine\Upgrade\UpgradeStep;
 use Tavaan\Engine\Upgrade\DataPatch;
