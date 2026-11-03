@@ -15,7 +15,7 @@ use Tavaan\Engine\Upgrade\Patch;
  */
 final class UpgradeScenarioTest extends TestCase
 {
-    public function t01_upgrade_applies_patches_in_order(): void
+    public function test_t01_upgrade_applies_patches_in_order(): void
     {
         // Scenario T-01
 $u = new Upgrader();
@@ -32,7 +32,7 @@ $u = new Upgrader();
         $this->assertCount(2, $applied);
         $this->assertSame(["1.0.1", "1.0.2"], $applied);
     }
-    public function t02_status_returns_applied_and_pending(): void
+    public function test_t02_status_returns_applied_and_pending(): void
     {
         // Scenario T-02
 $u = new Upgrader();
@@ -48,7 +48,7 @@ $u = new Upgrader();
         $status = $u->status();
         $this->assertContains("2.0", $status["pending"]);
     }
-    public function t03_rollback_reverts_patches(): void
+    public function test_t03_rollback_reverts_patches(): void
     {
         // Scenario T-03
 $u = new Upgrader();
@@ -66,7 +66,7 @@ $u = new Upgrader();
         $this->assertCount(1, $rolled);
         $this->assertSame("2.0", $rolled[0]);
     }
-    public function t04_patches_list_returns_versions(): void
+    public function test_t04_patches_list_returns_versions(): void
     {
         // Scenario T-04
 $u = new Upgrader();
