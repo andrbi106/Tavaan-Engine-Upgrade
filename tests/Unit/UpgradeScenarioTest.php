@@ -46,7 +46,8 @@ $u = new Upgrader();
         });
         $u->upgrade("1.0");
         $status = $u->status();
-        $this->assertContains("2.0", $status["pending"]);
+        $this->assertContains("2.0", $status["applied"]);
+        $this->assertContains("1.0", $status["pending"]);
     }
     public function test_t03_rollback_reverts_patches(): void
     {
