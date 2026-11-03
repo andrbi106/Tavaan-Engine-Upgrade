@@ -1,44 +1,78 @@
-# Upgrade
+# Tavaan Engine — Upgrade
 
-> ارتقای امن نسخه فریمورک با Data Patch، Backup، Rollback و Maintenance Mode.
+> **ارتقای نسخه** — موتور Upgrade در فریمورک تَوان
+
+## مشخصات
 
 | فیلد | مقدار |
-|------|------|
-| Engine ID | `tavaan.engine.upgrade` |
-| DOC-ID | `DOC-081E` |
-| Namespace | `Tavaan\Engine\Upgrade` |
-| اولویت | P2 (فاز M8) |
-| مخزن | https://github.com/andrbi106/Tavaan-Engine-Upgrade |
-| مستندات | https://github.com/Derogaramin/Tavaan-Doc/blob/main/docs/03-engines/upgrade.md
+|---|---|
+| شناسه | `tavaan.engine.upgrade` |
+| نام | `Upgrade` |
+| عنوان فارسی | ارتقای نسخه |
+| نسخه | `0.1.0` |
+| namespace | `Tavaan\Engine\Upgrade` |
+| نوع | `engine` |
 
-## استفاده
+## خطاها (Exceptions)
 
-```php
-use Tavaan\Engine\Upgrade\UpgradeManager;
-use Tavaan\Engine\Upgrade\UpgradeStep;
-use Tavaan\Engine\Upgrade\DataPatch;
+- `Tavaan\Engine\Upgrade\Exceptions\UpgradeException`
 
-$mgr = new UpgradeManager();
-$mgr->setCurrentVersion('1.0.0');
+## کلاس‌های اصلی
 
-// افزودن گام‌های ارتقا
-$mgr->addStep(new UpgradeStep('1.0.1', 'add column', up: fn() => $db->exec('ALTER TABLE users ADD COLUMN phone TEXT')));
-$mgr->addStep(new UpgradeStep('1.1.0', 'data backfill', up: fn() => $db->exec('UPDATE users SET status = "active"'));
+- `src/ConfigMigrator.php`
+- `src/Console/Commands/UpgradeCheckCommand.php`
+- `src/Console/Commands/UpgradeCommand.php`
+- `src/Console/Commands/UpgradePatchesCommand.php`
+- `src/Console/Commands/UpgradeRollbackCommand.php`
+- `src/Console/Commands/UpgradeStatusCommand.php`
+- `src/PatchRunner.php`
+- `src/PreChecker.php`
+- `src/Support/BackupAdapter.php`
+- `src/Support/BackupRunnerInterface.php`
+- `src/Upgrade.php`
+- `src/UpgradeRepository.php`
+- `src/Upgrader.php`
+- `src/VersionResolver.php`
 
-// ارتقا
-$result = $mgr->upgrade('1.1.0');
-// ['success' => true, 'steps_run' => 2, 'version' => '1.1.0']
+## Service Providerها
 
-// Rollback در صورت نیاز
-$mgr->rollback();
+- `Tavaan\Engine\Upgrade\UpgradeServiceProvider`
 
-// بررسی گام‌های pending
-$pending = $mgr->pendingSteps('1.1.0');
+## وابستگی‌ها
+
+**موتورهای مورد‌نیاز:**
+
+- `console`
+- `database`
+- `filesystem`
+
+## دستورات CLI
+
+- `upgrade`
+
+## پیکربندی
+
+- فایل پیکربندی: `config/upgrade.php`
+- کلید: `upgrade`
+
+## نصب
+
+```bash
+git clone https://github.com/andrbi106/Tavaan-Engine-Upgrade.git
 ```
 
-## مستندات
+این موتور بخشی از فریمورک تَوان است و معمولاً به‌صورت مستقیم نصب نمی‌شود،
+بلکه توسط [Tavaan-Core](https://github.com/andrbi106/Tavaan-Core) مدیریت می‌شود.
 
-[docs/03-engines/upgrade.md](https://github.com/Derogaramin/Tavaan-Doc/blob/main/docs/03-engines/upgrade.md)
+## روابط با سایر مخازن
 
----
-*Generated on 2026-11-03.*
+| مخزن | نقش |
+|---|---|
+| **`andrbi106/Tavaan-Engine-Upgrade`** (این مخزن) | موتور Upgrade |
+| `andrbi106/Tavaan-Engine-Core` | ساختار پایه + درگاه ارتباط موتورها |
+| `andrbi106/Tavaan-Core` | اسکلت اپلیکیشن + همهٔ موتورها |
+| `Derogaramin/Tavaan-Framework` | فریمورک مادر (monorepo) |
+
+## مجوز
+
+MIT — هم‌راستا با فریمورک مادر تَوان.
