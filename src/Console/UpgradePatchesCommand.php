@@ -9,7 +9,7 @@ use Tavaan\Core\Contracts\Console\CommandInterface;
 /**
  * upgrade:patches command.
  */
-final class Upgrade_patchesCommand implements CommandInterface
+final class UpgradePatchesCommand implements CommandInterface
 {
     public function name(): string
     {

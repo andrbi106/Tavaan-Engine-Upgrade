@@ -9,7 +9,7 @@ use Tavaan\Core\Contracts\Console\CommandInterface;
 /**
  * upgrade:status command.
  */
-final class Upgrade_statusCommand implements CommandInterface
+final class UpgradeStatusCommand implements CommandInterface
 {
     public function name(): string
     {

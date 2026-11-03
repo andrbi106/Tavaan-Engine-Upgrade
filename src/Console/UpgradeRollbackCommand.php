@@ -7,18 +7,18 @@ namespace Tavaan\Engine\Upgrade\Console;
 use Tavaan\Core\Contracts\Console\CommandInterface;
 
 /**
- * upgrade:check command.
+ * upgrade:rollback command.
  */
-final class Upgrade_checkCommand implements CommandInterface
+final class UpgradeRollbackCommand implements CommandInterface
 {
     public function name(): string
     {
-        return 'upgrade:check';
+        return 'upgrade:rollback';
     }
 
     public function description(): string
     {
-        return 'Run upgrade:check (TODO: fill description).';
+        return 'Run upgrade:rollback (TODO: fill description).';
     }
 
     public function handle(array $args = []): int
