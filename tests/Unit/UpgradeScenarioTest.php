@@ -14,4 +14,70 @@ use Tavaan\Engine\Upgrade\Patch;
  * Generated from ROADMAP.md scenarios — real implementations, not placeholders.
  */
 final class UpgradeScenarioTest extends TestCase
-{'    public function t01_upgrade_applies_patches_in_order(): void\n    {\n        // Scenario T-01\n$u = new Upgrader();\n        $log = [];\n        $u->add(new class("1.0.1", "p1") extends Patch {\n            public function up(): void {}\n            public function down(): void {}\n        });\n        $u->add(new class("1.0.2", "p2") extends Patch {\n            public function up(): void {}\n            public function down(): void {}\n        });\n        $applied = $u->upgrade();\n        $this->assertCount(2, $applied);\n        $this->assertSame(["1.0.1", "1.0.2"], $applied);\n    }\n    public function t02_status_returns_applied_and_pending(): void\n    {\n        // Scenario T-02\n$u = new Upgrader();\n        $u->add(new class("1.0", "p") extends Patch {\n            public function up(): void {}\n            public function down(): void {}\n        });\n        $u->add(new class("2.0", "p2") extends Patch {\n            public function up(): void {}\n            public function down(): void {}\n        });\n        $u->upgrade("1.0");\n        $status = $u->status();\n        $this->assertContains("2.0", $status["pending"]);\n    }\n    public function t03_rollback_reverts_patches(): void\n    {\n        // Scenario T-03\n$u = new Upgrader();\n        $calls = [];\n        $u->add(new class("1.0", "p") extends Patch {\n            public function up(): void {}\n            public function down(): void { $GLOBALS["d_1"] = true; }\n        });\n        $u->add(new class("2.0", "p2") extends Patch {\n            public function up(): void {}\n            public function down(): void { $GLOBALS["d_2"] = true; }\n        });\n        $u->upgrade();\n        $rolled = $u->rollback(1);\n        $this->assertCount(1, $rolled);\n        $this->assertSame("2.0", $rolled[0]);\n    }\n    public function t04_patches_list_returns_versions(): void\n    {\n        // Scenario T-04\n$u = new Upgrader();\n        $u->add(new class("1.0", "p") extends Patch {\n            public function up(): void {}\n            public function down(): void {}\n        });\n        $u->add(new class("2.0", "p2") extends Patch {\n            public function up(): void {}\n            public function down(): void {}\n        });\n        $this->assertSame(["1.0", "2.0"], $u->patches());\n    }'}
+{
+    public function t01_upgrade_applies_patches_in_order(): void
+    {
+        // Scenario T-01
+$u = new Upgrader();
+        $log = [];
+        $u->add(new class("1.0.1", "p1") extends Patch {
+            public function up(): void {}
+            public function down(): void {}
+        });
+        $u->add(new class("1.0.2", "p2") extends Patch {
+            public function up(): void {}
+            public function down(): void {}
+        });
+        $applied = $u->upgrade();
+        $this->assertCount(2, $applied);
+        $this->assertSame(["1.0.1", "1.0.2"], $applied);
+    }
+    public function t02_status_returns_applied_and_pending(): void
+    {
+        // Scenario T-02
+$u = new Upgrader();
+        $u->add(new class("1.0", "p") extends Patch {
+            public function up(): void {}
+            public function down(): void {}
+        });
+        $u->add(new class("2.0", "p2") extends Patch {
+            public function up(): void {}
+            public function down(): void {}
+        });
+        $u->upgrade("1.0");
+        $status = $u->status();
+        $this->assertContains("2.0", $status["pending"]);
+    }
+    public function t03_rollback_reverts_patches(): void
+    {
+        // Scenario T-03
+$u = new Upgrader();
+        $calls = [];
+        $u->add(new class("1.0", "p") extends Patch {
+            public function up(): void {}
+            public function down(): void { $GLOBALS["d_1"] = true; }
+        });
+        $u->add(new class("2.0", "p2") extends Patch {
+            public function up(): void {}
+            public function down(): void { $GLOBALS["d_2"] = true; }
+        });
+        $u->upgrade();
+        $rolled = $u->rollback(1);
+        $this->assertCount(1, $rolled);
+        $this->assertSame("2.0", $rolled[0]);
+    }
+    public function t04_patches_list_returns_versions(): void
+    {
+        // Scenario T-04
+$u = new Upgrader();
+        $u->add(new class("1.0", "p") extends Patch {
+            public function up(): void {}
+            public function down(): void {}
+        });
+        $u->add(new class("2.0", "p2") extends Patch {
+            public function up(): void {}
+            public function down(): void {}
+        });
+        $this->assertSame(["1.0", "2.0"], $u->patches());
+    }
+}
