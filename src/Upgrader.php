@@ -12,7 +12,7 @@ final class Upgrader
     }
     public function check(/* ... */): mixed
     {
-        return null;
+        return $this->user !== null;
     }
     public function rollback(/* ... */): mixed
     {
