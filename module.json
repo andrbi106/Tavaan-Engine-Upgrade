@@ -2,7 +2,7 @@
   "id": "tavaan.engine.upgrade",
   "type": "engine",
   "name": "Upgrade",
-  "title_fa": "ارتقای نسخهٔ سیستم",
+  "title_fa": "ارتقای نسخه",
   "version": "0.1.0",
   "namespace": "Tavaan\\Engine\\Upgrade\\",
   "autoload": {
@@ -10,28 +10,10 @@
       "Tavaan\\Engine\\Upgrade\\": "src/"
     }
   },
-  "providers": [
-    "Tavaan\\Engine\\Upgrade\\UpgraderServiceProvider"
-  ],
-  "requires": {
-    "php": ">=8.2",
-    "engines": [
-      "console",
-      "database",
-      "filesystem"
-    ]
-  },
-  "tables": [
-    "tvn_upgrades",
-    "tvn_upgrade_meta"
-  ],
-  "commands": [
-    "upgrade",
-    "upgrade:check",
-    "upgrade:rollback",
-    "upgrade:status",
-    "upgrade:patches"
-  ],
-  "docs": "docs/03-engines/upgrade.md",
-  "notes": "M8/TVN-0081: جریان ارتقا (pre-check → backup اجباری → maintenance → path گام‌به‌گام → schema+data patch+config migration → verify → up → rollback خودکار در شکست)."
+  "providers": ["Tavaan\\Engine\\Upgrade\\UpgradeServiceProvider"],
+  "requires": {"php": ">=8.2", "engines": ["console", "database", "filesystem"]},
+  "config": {"file": "config/upgrade.php", "key": "upgrade"},
+  "tables": [],
+  "commands": ["upgrade"],
+  "docs": "docs/03-engines/upgrade.md"
 }

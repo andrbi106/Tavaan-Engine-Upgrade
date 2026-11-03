@@ -1,10 +1,2 @@
 <?php
-
-declare(strict_types=1);
-
-/*| پیام‌های en برای موتور upgrade */
-
-return [
-    'error_default' => 'Unknown error (upgrade)',
-    'not_configured' => 'Engine not configured (upgrade)',
-];
+return ['error_upgrade' => 'Upgrade failed.', 'error_precheck' => 'Pre-check failed.'];
