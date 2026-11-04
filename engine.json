@@ -10,10 +10,25 @@
       "Tavaan\\Engine\\Upgrade\\": "src/"
     }
   },
-  "providers": ["Tavaan\\Engine\\Upgrade\\UpgradeServiceProvider"],
-  "requires": {"php": ">=8.2", "engines": ["console", "database", "filesystem"]},
-  "config": {"file": "config/upgrade.php", "key": "upgrade"},
+  "providers": [
+    "Tavaan\\Engine\\Upgrade\\UpgradeServiceProvider"
+  ],
+  "requires": {
+    "php": ">=8.2",
+    "engines": [
+      "console",
+      "database",
+      "filesystem"
+    ]
+  },
+  "config": {
+    "file": "config/upgrade.php",
+    "key": "upgrade"
+  },
   "tables": [],
-  "commands": ["upgrade"],
-  "docs": "docs/03-engines/upgrade.md"
+  "commands": [
+    "upgrade"
+  ],
+  "docs": "docs/03-engines/upgrade.md",
+  "class": "Tavaan\\Engine\\Upgrade\\UpgradeEngine"
 }
